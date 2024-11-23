@@ -11,7 +11,7 @@ tx_block=$(bitcoin-cli getblock $(bitcoin-cli getblockhash $tx_height) | jq -r "
 
 result=""
 for tx in $tx_block; do
-    tx_inputs=$(bitcoin-cli getrawtransaction $tx true | jq ".vin.[].txid")
+    tx_inputs=$(bitcoin-cli getrawtransaction $tx true | jq ".vin[].txid")
     for input in $tx_inputs; do
         # echo $input
         if [ $input == $coinbase ]; then
